@@ -1,5 +1,6 @@
-#FROM nvcr.io/nvidia/cuda:11.8.0-cudnn8-devel-ubuntu22.04
-FROM nvcr.io/nvidia/cuda:12.9.0-cudnn-devel-ubuntu22.04
+FROM nvcr.io/nvidia/cuda:12.1.0-cudnn8-devel-ubuntu22.04
+# FROM nvcr.io/nvidia/cuda:12.9.0-cudnn-devel-ubuntu22.04
+# nvidia/cuda:12.5.0-devel-ubuntu22.04
 
 ENV DEBIAN_FRONTEND=noninteractive
 
@@ -22,6 +23,9 @@ RUN apt-get update && apt-get install -y \
     qtbase5-dev \
     xvfb \
     python3-tk \ 
+    tmux \
+    mesa-utils \
+    ssh \
     && rm -rf /var/lib/apt/lists/* && apt-get clean
 
 # Set Python 3.10 as the default python version
@@ -32,13 +36,17 @@ RUN python -m venv /opt/venv
 ENV PATH="/opt/venv/bin:$PATH"
 RUN echo 'source /opt/venv/bin/activate' >> ~/.bashrc
 
+# NVIDIA paths
+ENV PATH="/usr/local/cuda-12.1/bin:${PATH}"
+ENV LD_LIBRARY_PATH="/usr/local/cuda-12.1/lib64:${LD_LIBRARY_PATH}"
+
 # Nvidia env vars
 ENV NVIDIA_VISIBLE_DEVICES ${NVIDIA_VISIBLE_DEVICES:-all}
 ENV NVIDIA_DRIVER_CAPABILITIES ${NVIDIA_DRIVER_CAPABILITIES:+$NVIDIA_DRIVER_CAPABILITIES,}graphics
 
 # RUN pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu126
 
+RUN pip install jax[cuda12]==0.5.0
 
-COPY franka_sim/requirements.txt .
 
-RUN pip install -r requirements.txt
+

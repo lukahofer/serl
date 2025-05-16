@@ -4,7 +4,7 @@
         "dockerfile": "Dockerfile",
         "context": ".."
     },
-    "postCreateCommand": "nvidia-smi",
+    "postCreateCommand": "cd serl_launcher && pip install -e . && pip install -r requirements.txt && cd ../franka_sim && pip install -e . && pip install -r requirements.txt",
     "customizations": {
         "vscode": {
             "extensions": [
@@ -47,7 +47,7 @@
         "--net=host",
         "--ipc=host",
         "--gpus=all",
-        "--runtime=nvidia"
+        "--runtime=nvidia",
     ],
     "remoteUser": "root"
 }     
