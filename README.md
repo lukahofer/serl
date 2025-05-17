@@ -43,26 +43,10 @@ We fixed a major issue in the intervention action frame. See release [v0.1.1](ht
     create an environment with
     ```bash
     conda create -n serl python=3.10
+    conda activate serl
     ```
 
-2. **Install Jax as follows:**
-    - For CPU (not recommended):
-        ```bash
-        pip install --upgrade "jax[cpu]"
-        ```
-
-    - For GPU:
-        ```bash
-        pip install --upgrade "jax[cuda12_pip]==0.4.35" -f https://storage.googleapis.com/jax-releases/jax_cuda_releases.html
-        ```
-
-    - For TPU
-        ```bash
-        pip install --upgrade "jax[tpu]" -f https://storage.googleapis.com/jax-releases/libtpu_releases.html
-        ```
-    - See the [Jax Github page](https://github.com/google/jax) for more details on installing Jax.
-
-3. **Install the serl_launcher**
+2. **Install the serl_launcher**
     ```bash
     cd serl_launcher
     pip install -e .
