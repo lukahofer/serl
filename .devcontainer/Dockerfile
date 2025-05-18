@@ -44,9 +44,5 @@ ENV LD_LIBRARY_PATH="/usr/local/cuda-12.1/lib64:${LD_LIBRARY_PATH}"
 ENV NVIDIA_VISIBLE_DEVICES ${NVIDIA_VISIBLE_DEVICES:-all}
 ENV NVIDIA_DRIVER_CAPABILITIES ${NVIDIA_DRIVER_CAPABILITIES:+$NVIDIA_DRIVER_CAPABILITIES,}graphics
 
-# RUN pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu126
-
-RUN pip install jax[cuda12]==0.5.0
-
 
 
